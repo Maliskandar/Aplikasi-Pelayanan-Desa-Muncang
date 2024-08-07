@@ -413,7 +413,7 @@ class SuratController extends Controller
 
     public function showSKCK()
     {
-        $title = 'Buat Surat Pengantar SKCK';
+        $title = 'Buat Surat Pengantar SKU';
 
         $nomor_surat = DB::table('daftarsurats')
             ->orderBy('created_at', 'desc')
@@ -428,6 +428,8 @@ class SuratController extends Controller
             'nomor_surat' => 'required|string|max:255',
             'selectedNIK' => 'required|string|max:16',
             'keperluan' => 'required|string|max:1000',
+            'keperluan' => 'required',
+            'usaha' => 'required',
         ]);
 
         $exists = daftarsurat::where('nomor_surat', $request->input('nomor_surat'))->exists();
@@ -445,7 +447,7 @@ class SuratController extends Controller
         $daftarsurat = daftarsurat::create([
             'nomor_surat' => $request->input('nomor_surat'),
             'tanggal_surat' => now(),
-            'jenis_surat' => 'SKCK',
+            'jenis_surat' => 'SKU',
             'nama_pemohon' => $pemohon->nama,
             'nik_pemohon' => $request->input('selectedNIK'),
             'status_surat' => 'belum_cetak',
@@ -453,7 +455,9 @@ class SuratController extends Controller
 
         $skck = suratskck::create([
             'daftarsurat_id' => $daftarsurat->id,
-            'keperluan' => $request->input('keperluan')
+            'keperluan' => $request->input('keperluan'),
+            'usaha' => $request->input('usaha'), // Tambahkan input usaha
+            'tahun' => $request->input('tahun'), // Tambahkan input tahun
         ]);
 
         return redirect('/user/operator/kesekretariatan')->with('success', 'Surat Berhasil Dibuat');
@@ -643,7 +647,7 @@ class SuratController extends Controller
 
             // Pass the data to the SKD-specific view
             return view('cetaksurat.penghasilan', compact('judulsurat', 'daftarsurat', 'suratpenghasilan', 'penduduk', 'tanggal_surat', 'ttd', 'tanggalsurat'));
-        } elseif ($daftarsurat->jenis_surat === 'SKCK') {
+        } elseif ($daftarsurat->jenis_surat === 'SKU') {
             $suratskck = suratskck::where('daftarsurat_id', $id)->first();
 
             // Check if the suratskd entry exists

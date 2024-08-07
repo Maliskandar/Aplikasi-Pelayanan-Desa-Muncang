@@ -1,21 +1,31 @@
 <style>
     .judul-surat {
-        text-decoration: underline; /* Membuat teks menjadi bergaris bawah */
-        font-size: 1.2em; /* Ukuran teks judul */
-        margin-bottom: 5px; /* Jarak antara judul dan nomor surat */
-        line-height: 1; /* Mengatur jarak antarbaris menjadi lebih dekat */
+        text-decoration: underline;
+        /* Membuat teks menjadi bergaris bawah */
+        font-size: 1.2em;
+        /* Ukuran teks judul */
+        margin-bottom: 5px;
+        /* Jarak antara judul dan nomor surat */
+        line-height: 1;
+        /* Mengatur jarak antarbaris menjadi lebih dekat */
     }
+
     .nomor-surat {
-        font-size: 1em; /* Ukuran teks nomor surat */
-        line-height: 1; /* Mengatur jarak antarbaris menjadi lebih dekat */
+        font-size: 1em;
+        /* Ukuran teks nomor surat */
+        line-height: 1;
+        /* Mengatur jarak antarbaris menjadi lebih dekat */
     }
-    .isi-surat{
+
+    .isi-surat {
         font-size: 1.1em;
         text-align: justify;
     }
-    .indent{
+
+    .indent {
         text-indent: 3.5em;
     }
+
     /* .table{
         margin-left: 3.5em;
     } */
@@ -29,13 +39,14 @@
 </style>
 
 <x-layoutsurat>
-    <x-slot:tabs>Cetak: SKCK</x-slot>
-    <x-slot:judulsurat>{{ $judulsurat }}</x-slot>
-    <x-slot:nomorsurat>{{ $daftarsurat->nomor_surat }}</x-slot>
-    
+    <x-slot:tabs>Cetak: Surat Keterangan Usaha</x-slot>
+    <x-slot:judulsurat>SURAT KETERANGAN USAHA</x-slot>
+    <x-slot:nomorsurat>No. {{ $daftarsurat->nomor_surat }}</x-slot>
+
 
     <div class="isi-surat">
-        <p class="indent justify">Yang bertanda tangan dibawah ini, Kami Kepala Desa Kedungjaran, Kecamatan Sragi, Kabupaten Pekalongan Menerangkan bahwa:</p>
+        <p class="indent justify">Yang bertanda tangan dibawah ini atas nama Kepala Desa Muncang Kecamatan Bodeh
+            Kabupaten Pemalang, menerangkan dengan sebenarnya bahwa :</p>
         <table class="table table-borderless table-sm" style="width: 100%;">
             <tr>
                 <td style="width: 25%;">Nama</td>
@@ -50,13 +61,14 @@
             <tr>
                 <td style="width: 25%;">Tempat/Tanggal Lahir</td>
                 <td style="width: 3%;">: </td>
-                <td style="width: 72%;">{{ $penduduk->tempat_lahir }}, {{ \Carbon\Carbon::parse($penduduk->tanggal_lahir)->format('d-m-Y') }}</td>
+                <td style="width: 72%;">{{ $penduduk->tempat_lahir }},
+                    {{ \Carbon\Carbon::parse($penduduk->tanggal_lahir)->format('d-m-Y') }}</td>
             </tr>
-            <tr>
+            {{-- <tr>
                 <td style="width: 25%;">Jenis Kelamin</td>
                 <td style="width: 3%;">: </td>
                 <td style="width: 72%;">
-                    @if($penduduk->jenis_kelamin == 'P')
+                    @if ($penduduk->jenis_kelamin == 'P')
                         Perempuan
                     @elseif($penduduk->jenis_kelamin == 'L')
                         Laki-laki
@@ -64,8 +76,8 @@
                         {{ $penduduk->jenis_kelamin }} <!-- Tampilkan nilai langsung jika tidak ada kecocokan -->
                     @endif
                 </td>
-            </tr>
-            <tr>
+            </tr> --}}
+            {{-- <tr>
                 <td style="width: 25%;">Agama</td>
                 <td style="width: 3%;">: </td>
                 <td style="width: 72%;">{{ $penduduk->agama }}</td>
@@ -79,17 +91,17 @@
                 <td style="width: 25%;">Pendidikan Terakhir</td>
                 <td style="width: 3%;">: </td>
                 <td style="width: 72%;">{{ $penduduk->pendidikan }}</td>
-            </tr>
+            </tr> --}}
             <tr>
                 <td style="width: 25%;">Pekerjaan</td>
                 <td style="width: 3%;">: </td>
                 <td style="width: 72%;">{{ $penduduk->pekerjaan }}</td>
             </tr>
-            <tr>
+            {{-- <tr>
                 <td style="width: 25%;">Status Perkawinan</td>
                 <td style="width: 3%;">: </td>
                 <td style="width: 72%;">
-                    @if($penduduk->status_perkawinan == 'kawin')
+                    @if ($penduduk->status_perkawinan == 'kawin')
                         Kawin
                     @elseif($penduduk->status_perkawinan == 'belum_kawin')
                         Belum kawin
@@ -97,33 +109,42 @@
                         {{ $penduduk->status_perkawinan }} <!-- Tampilkan nilai langsung jika tidak ada kecocokan -->
                     @endif
                 </td>
+            </tr> --}}
+            <tr>
+                <td style="width: 25%;">Alamat</td>
+                <td style="width: 3%;">: </td>
+                <td style="width: 72%;" class="justify">{{ $penduduk->dusun }}, RT {{ $penduduk->RT }}, RW
+                    {{ $penduduk->RW }}, Kecamatan Sragi, Kab. Pekalongan, Jawa Tengah</td>
             </tr>
             <tr>
-                <td style="width: 25%;">Tempat Tinggal</td>
+                <td style="width: 25%;">No. KK</td>
                 <td style="width: 3%;">: </td>
-                <td style="width: 72%;" class="justify">{{ $penduduk->dusun }}, RT {{ $penduduk->RT }}, RW {{ $penduduk->RW }}, Kecamatan Sragi, Kab. Pekalongan, Jawa Tengah</td>
+                <td style="width: 72%;">
+                    ...............................
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 25%;">No. HP</td>
+                <td style="width: 3%;">: </td>
+                <td style="width: 72%;">
+                    ...............................
+                </td>
             </tr>
             <tr>
                 <td style="width: 25%;">Keterangan</td>
                 <td style="width: 3%;">: </td>
                 <td style="width: 72%;" class="justify">
-                    Bahwa orang tersebut benar-benar warga Desa Kedungjaran yang berkelakuan baik dan tidak pernah terlibat perkara apapun
+                    Orang tersebut diatas benar-benar mempunyai usaha {{ $suratskck->usaha }} di Desa
+                    Muncang Kecamatan Bodeh sejak tahun {{ $suratskck->tahun }} sampai dengan saat ini.
+                </td>
+            </tr>
 
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 25%;">Keperluan</td>
-                <td style="width: 3%;">: </td>
-                <td style="width: 72%;">
-                    {{ $suratskck->keperluan }}
-                </td>
-            </tr>
         </table>
         <p style="margin-top: 0">
-            Demikian Surat Keterangan ini kami buat agar dapat dipergunakan sebagaimana mestinya.
+            Demikian surat keterangan ini kami buat agar dapat dipergunakan seperlunya.
         </p>
     </div>
-    
+
 
     <x-ttdkades>
         <x-slot:tanggalsurat>{{ $tanggal_surat }}</x-slot>
@@ -131,16 +152,7 @@
             <x-slot:nama_gambar>{{ $ttd->nama_gambar }}</x-slot>
             <x-slot:nama_kades>{{ $ttd->nama_kades }}</x-slot>
         @endforeach
-        <x-slot:ttdlain>
-            <p>Pemegang Surat</p>
-            <p style="text-decoration: underline; margin-top:89;">(...................................)</p>
-        </x-slot>
     </x-ttdkades>
 
-    <div style="margin-top: 20px; text-align: center;">
-        <p style="margin: 0;">Mengetahui</p>
-        <p>Camat Sragi</p>
-        <p style="text-decoration: underline; margin-top:70;">(...................................)</p>
-    </div>
 
 </x-layoutsurat>

@@ -50,7 +50,7 @@ class editSuratConttoller extends Controller
             $title = 'Edit Surat Keterangan Penghasilan';
             $skp = suratpenghasilan::where('daftarsurat_id', $surat->id)->first();
             return view('editsurat.editSKP', compact('title', 'surat', 'skp'));
-        } elseif ($surat->jenis_surat == 'SKCK') {
+        } elseif ($surat->jenis_surat == 'SKU') {
             $title = 'Edit Surat Pengantar SKCK';
             $skck = suratskck::where('daftarsurat_id', $surat->id)->first();
             return view('editsurat.editSKCK', compact('title', 'surat', 'skck'));
@@ -294,14 +294,16 @@ class editSuratConttoller extends Controller
         $request->validate([
             'selectedNIK' => 'required|string|max:16',
             'keperluan' => 'required|string|max:1000',
+            'usaha' => 'required|string|max:255', // Validasi untuk usaha
+            'tahun' => 'required|integer|min:1900|max:' . date('Y'), // Validasi untuk tahun
         ]);
 
-        $daftarsurat = daftarsurat::findOrFail($id);
+        $daftarsurat = Daftarsurat::findOrFail($id);
 
-        $pemohon = penduduk::where('NIK', $request->input('selectedNIK'))->first();
+        $pemohon = Penduduk::where('NIK', $request->input('selectedNIK'))->first();
 
         if (!$pemohon) {
-            return redirect()->back()->with(['erros' => 'Pemohon tidak ditemukan']);
+            return redirect()->back()->with(['errors' => 'Pemohon tidak ditemukan']);
         }
 
         $daftarsurat->update([
@@ -309,14 +311,17 @@ class editSuratConttoller extends Controller
             'nik_pemohon' => $request->input('selectedNIK'),
         ]);
 
-        $skck = suratskck::where('daftarsurat_id', $daftarsurat->id)->first();
+        $skck = Suratskck::where('daftarsurat_id', $daftarsurat->id)->first();
 
         $skck->update([
-            'keperluan' => $request->input('keperluan')
+            'keperluan' => $request->input('keperluan'),
+            'usaha' => $request->input('usaha'), // Tambahkan input usaha
+            'tahun' => $request->input('tahun'), // Tambahkan input tahun
         ]);
 
         return redirect('/user/operator/kesekretariatan')->with('success', 'Surat berhasil diperbarui');
     }
+
 
     public function editlain(Request $request, $id)
     {

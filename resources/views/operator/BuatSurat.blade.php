@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-2">
+        {{-- <div class="col-sm-2">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">SKTM</h5>
@@ -38,7 +38,7 @@
                     <a href="/buatformSKTM" class="btn btn-primary">Buat Surat</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="col-sm-2">
             <div class="card">
                 <div class="card-body">
@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-2">
+        {{-- <div class="col-sm-2">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">SK</h5>
@@ -56,7 +56,7 @@
                     <a href="/buatformwali" class="btn btn-primary">Buat Surat</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="col-sm-2">
             <div class="card">
                 <div class="card-body">
@@ -69,13 +69,13 @@
         <div class="col-sm-2">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">SP</h5>
-                    <p class="card-text">Surat Pengantar SKCK</p>
+                    <h5 class="card-title">SKU</h5>
+                    <p class="card-text">Surat Pengantar Keterangan Usaha</p>
                     <a href="/buatformSKCK" class="btn btn-primary">Buat Surat</a>
                 </div>
             </div>
         </div>
-        <div class="col-sm-2">
+        {{-- <div class="col-sm-2">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Lain-lain</h5>
@@ -83,7 +83,7 @@
                     <a href="/buatformlain" class="btn btn-primary">Buat Surat</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 
 </x-layout>

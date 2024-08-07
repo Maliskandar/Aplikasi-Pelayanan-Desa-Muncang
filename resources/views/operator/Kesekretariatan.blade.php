@@ -46,7 +46,7 @@
                             $item->jenis_surat != 'SKK' &&
                             $item->jenis_surat != 'SKWN' &&
                             $item->jenis_surat != 'SKP' &&
-                            $item->jenis_surat != 'SKCK')
+                            $item->jenis_surat != 'SKU')
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-secondary dropdown-toggle"
